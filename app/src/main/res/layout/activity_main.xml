@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/sourceFragment"
         android:name="sk.upjs.ics.android.markdownr.SourceFragment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         />
@@ -16,7 +16,7 @@
     <fragment
         android:id="@+id/previewFragment"
         android:name="sk.upjs.ics.android.markdownr.PreviewFragment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         />
