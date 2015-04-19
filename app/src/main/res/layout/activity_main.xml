@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout android:orientation="horizontal" xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -10,6 +10,15 @@
         android:name="sk.upjs.ics.android.markdownr.SourceFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         />
 
-</RelativeLayout>
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="sk.upjs.ics.android.markdownr.PreviewFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
+
+</LinearLayout>
