@@ -3,22 +3,9 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:id="@+id/singleFragmentLayout"
+    >
 
-    <fragment
-        android:id="@+id/sourceFragment"
-        android:name="sk.upjs.ics.android.markdownr.SourceFragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
-
-    <fragment
-        android:id="@+id/previewFragment"
-        android:name="sk.upjs.ics.android.markdownr.PreviewFragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
-
+    <!-- single fragment will be added dynamically -->
 </LinearLayout>

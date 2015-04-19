@@ -22,7 +22,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void showSourcePane() {
-
+        getFragmentManager()
+                .beginTransaction()
+                .add(R.id.singleFragmentLayout, new SourceFragment())
+                .commit();
     }
 
 
