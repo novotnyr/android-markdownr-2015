@@ -12,11 +12,22 @@ import android.webkit.WebView;
 public class PreviewFragment extends Fragment {
 
     public static final String URL_ENCODING = null;
+    public static final String ARG_HTML_SOURCE = "HTML_SOURCE";
 
     private WebView previewWebView;
 
     public PreviewFragment() {
         // Required empty public constructor
+    }
+
+    public static PreviewFragment newInstance(String htmlSource) {
+        Bundle arguments = new Bundle();
+        arguments.putSerializable(ARG_HTML_SOURCE, htmlSource);
+
+        PreviewFragment fragment = new PreviewFragment();
+        fragment.setArguments(arguments);
+
+        return fragment;
     }
 
     @Override
@@ -25,8 +36,16 @@ public class PreviewFragment extends Fragment {
         View fragmentLayout = inflater.inflate(R.layout.fragment_preview, container, false);
 
         this.previewWebView = (WebView) fragmentLayout.findViewById(R.id.previewWebView);
-        this.previewWebView.loadData("<i>No Markdown source</i>", "text/html; charset=UTF-8", URL_ENCODING);
+        this.previewWebView.loadData(getHtmlSource(), "text/html; charset=UTF-8", URL_ENCODING);
 
         return fragmentLayout;
+    }
+
+    private String getHtmlSource() {
+        Bundle arguments = getArguments();
+        if(arguments != null && arguments.containsKey(ARG_HTML_SOURCE)) {
+            return arguments.getString(ARG_HTML_SOURCE);
+        }
+        return "<i>No Markdown source</i>";
     }
 }
