@@ -1,6 +1,7 @@
 package sk.upjs.ics.android.markdownr;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,6 +10,8 @@ import android.widget.EditText;
 
 
 public class MainActivity extends Activity {
+
+    public static final String DEFAULT_BACKSTACK_NAME = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class MainActivity extends Activity {
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.singleFragmentLayout, previewFragment)
+                .addToBackStack(DEFAULT_BACKSTACK_NAME)
                 .commit();
     }
 
