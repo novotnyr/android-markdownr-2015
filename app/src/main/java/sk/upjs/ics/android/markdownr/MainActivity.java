@@ -12,6 +12,7 @@ import android.widget.EditText;
 public class MainActivity extends Activity {
 
     public static final String DEFAULT_BACKSTACK_NAME = null;
+    public static final String FRAGMENT_TAG_SOURCE = "SourceFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +30,14 @@ public class MainActivity extends Activity {
     }
 
     private void showSourcePane() {
+        SourceFragment sourceFragment = (SourceFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG_SOURCE);
+        if(sourceFragment == null) {
+            sourceFragment = new SourceFragment();
+        }
+
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.singleFragmentLayout, new SourceFragment())
+                .replace(R.id.singleFragmentLayout, sourceFragment, FRAGMENT_TAG_SOURCE)
                 .commit();
     }
 
