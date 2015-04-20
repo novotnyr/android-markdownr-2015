@@ -1,10 +1,11 @@
 package sk.upjs.ics.android.markdownr;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 
 public class MainActivity extends Activity {
@@ -31,6 +32,21 @@ public class MainActivity extends Activity {
                 .commit();
     }
 
+    private void showPreviewPane() {
+        EditText sourceEditText = (EditText) findViewById(R.id.sourceEditText);
+        if(sourceEditText == null) {
+            Log.w(MainActivity.class.getName(), "HTML source fragment is not loaded");
+            return;
+        }
+
+        String htmlSource = sourceEditText.getText().toString();
+
+        PreviewFragment previewFragment = PreviewFragment.newInstance(htmlSource);
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.singleFragmentLayout, previewFragment)
+                .commit();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,7 +58,18 @@ public class MainActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        switch(id) {
+            case R.id.sourceAction:
+                showSourcePane();
+                return true;
+            case R.id.previewAction:
+                showPreviewPane();
+                return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
+
 
 }
