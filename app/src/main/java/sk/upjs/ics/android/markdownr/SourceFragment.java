@@ -1,12 +1,19 @@
 package sk.upjs.ics.android.markdownr;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 public class SourceFragment extends Fragment {
+    private static final String PREFERENCES_KEY_DRAFT_SOURCE = "draftSource";
+
+    private EditText sourceEditText;
+
     public SourceFragment() {
         // Required empty public constructor
     }
@@ -14,6 +21,31 @@ public class SourceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_source, container, false);
+        View frameLayout = inflater.inflate(R.layout.fragment_source, container, false);
+        sourceEditText = (EditText) getView().findViewById(R.id.sourceEditText);
+        return frameLayout;
     }
+
+    @Override
+    public void onPause() {
+        getPreferences().edit()
+                .putString(PREFERENCES_KEY_DRAFT_SOURCE, sourceEditText.getText().toString())
+                .commit();
+
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        String htmlSource = getPreferences().getString(PREFERENCES_KEY_DRAFT_SOURCE, "");
+        sourceEditText.setText(htmlSource);
+    }
+
+    private SharedPreferences getPreferences() {
+        return getActivity()
+                .getPreferences(Activity.MODE_PRIVATE);
+    }
+
 }
