@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 public class SourceFragment extends Fragment {
     private static final String PREFERENCES_KEY_DRAFT_SOURCE = "draftSource";
+    public static final String DEFAULT_HTML_SOURCE = "";
 
     private EditText sourceEditText;
 
@@ -39,7 +40,7 @@ public class SourceFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        String htmlSource = getPreferences().getString(PREFERENCES_KEY_DRAFT_SOURCE, "");
+        String htmlSource = getPreferences().getString(PREFERENCES_KEY_DRAFT_SOURCE, DEFAULT_HTML_SOURCE);
         sourceEditText.setText(htmlSource);
     }
 
