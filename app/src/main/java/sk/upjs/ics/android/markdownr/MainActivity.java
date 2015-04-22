@@ -58,6 +58,10 @@ public class MainActivity extends Activity implements SourceFragment.SourceChang
                 .commit();
     }
 
+    private boolean isSourceFragmentShown() {
+        return findViewById(R.id.sourceEditText) != null;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -66,14 +70,35 @@ public class MainActivity extends Activity implements SourceFragment.SourceChang
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem sourceActionItem = menu.findItem(R.id.sourceAction);
+        MenuItem previewActionItem = menu.findItem(R.id.previewAction);
+
+        if(isSinglePane()) {
+            if(isSourceFragmentShown()) {
+                sourceActionItem.setVisible(false);
+            } else {
+                previewActionItem.setVisible(false);
+            }
+        } else {
+            sourceActionItem.setVisible(false);
+            previewActionItem.setVisible(false);
+        }
+        return true;
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch(id) {
             case R.id.sourceAction:
                 showSourcePane();
+                invalidateOptionsMenu();
                 return true;
             case R.id.previewAction:
                 showPreviewPane();
+                invalidateOptionsMenu();
                 return true;
         }
 
