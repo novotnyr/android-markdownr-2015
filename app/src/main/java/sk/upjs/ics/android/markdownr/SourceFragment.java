@@ -17,9 +17,20 @@ public class SourceFragment extends Fragment {
 
     private EditText sourceEditText;
 
+    private SourceChangedListener sourceChangedListener;
+
     public SourceFragment() {
         // Required empty public constructor
     }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if(activity instanceof SourceChangedListener) {
+            setSourceChangedListener((SourceChangedListener) activity);
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,4 +94,7 @@ public class SourceFragment extends Fragment {
         public void onSourceChanged(String source);
     }
 
+    public void setSourceChangedListener(SourceChangedListener sourceChangedListener) {
+        this.sourceChangedListener = sourceChangedListener;
+    }
 }
