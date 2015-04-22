@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +25,36 @@ public class SourceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View frameLayout = inflater.inflate(R.layout.fragment_source, container, false);
-        sourceEditText = (EditText) getView().findViewById(R.id.sourceEditText);
+        sourceEditText = (EditText) frameLayout.findViewById(R.id.sourceEditText);
+        addSourceTextWatcher();
         return frameLayout;
+    }
+
+    private void addSourceTextWatcher() {
+        sourceEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                notifySourceChanged();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // empty implementation
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // empty implementation
+            }
+        });
+    }
+
+    private void notifySourceChanged() {
+        PreviewFragment previewFragment = (PreviewFragment) getFragmentManager().findFragmentById(R.id.previewFragment);
+        if(previewFragment == null) {
+            return;
+        }
+        previewFragment.setHtmlSource(sourceEditText.getText().toString());
     }
 
     @Override

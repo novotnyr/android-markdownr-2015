@@ -48,4 +48,8 @@ public class PreviewFragment extends Fragment {
         }
         return "<i>No Markdown source</i>";
     }
+
+    public void setHtmlSource(String htmlSource) {
+        this.previewWebView.loadData(htmlSource, "text/html; charset=UTF-8", URL_ENCODING);
+    }
 }
