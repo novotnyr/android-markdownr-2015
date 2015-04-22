@@ -61,11 +61,7 @@ public class SourceFragment extends Fragment {
     }
 
     private void notifySourceChanged() {
-        PreviewFragment previewFragment = (PreviewFragment) getFragmentManager().findFragmentById(R.id.previewFragment);
-        if(previewFragment == null) {
-            return;
-        }
-        previewFragment.setHtmlSource(sourceEditText.getText().toString());
+        this.sourceChangedListener.onSourceChanged(this.sourceEditText.getText().toString());
     }
 
     @Override
