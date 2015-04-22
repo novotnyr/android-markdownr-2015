@@ -79,4 +79,8 @@ public class SourceFragment extends Fragment {
                 .getPreferences(Activity.MODE_PRIVATE);
     }
 
+    public interface SourceChangedListener {
+        public void onSourceChanged(String source);
+    }
+
 }
