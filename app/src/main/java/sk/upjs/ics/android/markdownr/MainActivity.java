@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements SourceFragment.SourceChangedListener{
 
     public static final String DEFAULT_BACKSTACK_NAME = null;
     public static final String FRAGMENT_TAG_SOURCE = "SourceFragment";
@@ -81,5 +81,13 @@ public class MainActivity extends Activity {
     }
 
 
-
+    @Override
+    public void onSourceChanged(String source) {
+        PreviewFragment previewFragment = (PreviewFragment) getFragmentManager()
+                .findFragmentById(R.id.previewFragment);
+        if(previewFragment == null) {
+            return;
+        }
+        previewFragment.setHtmlSource(source);
+    }
 }
