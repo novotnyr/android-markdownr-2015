@@ -36,7 +36,7 @@ public class PreviewFragment extends Fragment {
         View fragmentLayout = inflater.inflate(R.layout.fragment_preview, container, false);
 
         this.previewWebView = (WebView) fragmentLayout.findViewById(R.id.previewWebView);
-        this.previewWebView.loadData(getHtmlSource(), "text/html; charset=UTF-8", URL_ENCODING);
+        setHtmlSource(getHtmlSource());
 
         return fragmentLayout;
     }
