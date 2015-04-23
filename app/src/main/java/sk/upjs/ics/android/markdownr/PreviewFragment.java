@@ -50,6 +50,9 @@ public class PreviewFragment extends Fragment {
     }
 
     public void setHtmlSource(String htmlSource) {
+        if(this.previewWebView == null) {
+            return;
+        }
         this.previewWebView.loadData(htmlSource, "text/html; charset=UTF-8", URL_ENCODING);
     }
 }
