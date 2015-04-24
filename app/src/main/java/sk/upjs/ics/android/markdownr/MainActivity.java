@@ -8,6 +8,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import org.tautua.markdownpapers.Markdown;
+import org.tautua.markdownpapers.parser.ParseException;
+
+import java.io.StringReader;
+import java.io.StringWriter;
+
 
 public class MainActivity extends Activity implements SourceFragment.SourceChangedListener{
 
@@ -48,7 +54,7 @@ public class MainActivity extends Activity implements SourceFragment.SourceChang
             return;
         }
 
-        String htmlSource = sourceEditText.getText().toString();
+        String htmlSource = toHtml(sourceEditText.getText().toString());
 
         PreviewFragment previewFragment = PreviewFragment.newInstance(htmlSource);
         getFragmentManager()
@@ -113,6 +119,20 @@ public class MainActivity extends Activity implements SourceFragment.SourceChang
         if(previewFragment == null) {
             return;
         }
-        previewFragment.setHtmlSource(source);
+        previewFragment.setHtmlSource(toHtml(source));
+    }
+
+    public String toHtml(String markdown) {
+        try {
+            StringReader input = new StringReader(markdown);
+            StringWriter output = new StringWriter();
+
+            Markdown markdownConverter = new Markdown();
+            markdownConverter.transform(input, output);
+
+            return output.toString();
+        } catch (ParseException e) {
+            return "Syntax error";
+        }
     }
 }
